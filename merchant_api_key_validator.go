@@ -60,7 +60,9 @@ func (store DefaultStore) Get(key string) (Merchant, error) {
 func NewValidator(client *metahttp.Client) KeyValidator {
 	return &DefaultValidator{
 		client: client,
-		store:  DefaultStore{},
+		store: DefaultStore{
+			data: map[string]Merchant{},
+		},
 	}
 }
 
