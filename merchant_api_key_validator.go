@@ -74,7 +74,8 @@ func NewValidatorWithStore(client *metahttp.Client, store KeyStore) KeyValidator
 func (svc DefaultValidator) fetchMerchantDetails(apikey string) (Merchant, error) {
 	ctx := context.Background()
 	var res MerchantAPIResponse
-	err := svc.client.Get(ctx, "", map[string]string{}, &res)
+	req := map[string]string{"apikey": apikey}
+	err := svc.client.Post(ctx, "", map[string]string{}, req, &res)
 
 	if err != nil {
 		return Merchant{}, err
