@@ -8,3 +8,5 @@ github.com/golang-jwt/jwt v3.2.2+incompatible h1:IfV12K8xAKAnZqdXVzCZ+TOjboZ2keL
 github.com/golang-jwt/jwt v3.2.2+incompatible/go.mod h1:8pz2t5EyA70fFQQSrl6XZXzqecmYZeUEB8OUGHkxJ+I=
 github.com/krishnateja262/meta-http v0.0.0-20220315152014-2982ae223529 h1:4wTchEXCJ28eKKjcXIT06YZ4trihUWn+3qgLQZU1CJM=
 github.com/krishnateja262/meta-http v0.0.0-20220315152014-2982ae223529/go.mod h1:MtLbOomVxKHrC33kRG5ohlG6mPSzfDXuMuN5STtEPhU=
+github.com/krishnateja262/meta-http v0.0.0-20220503113759-149e04f711cd h1:riajiSNpbzKeyqOjNKsUSLGu/kgJkSnONim4w6ZRqnM=
+github.com/krishnateja262/meta-http v0.0.0-20220503113759-149e04f711cd/go.mod h1:MtLbOomVxKHrC33kRG5ohlG6mPSzfDXuMuN5STtEPhU=
