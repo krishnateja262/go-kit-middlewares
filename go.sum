@@ -10,3 +10,5 @@ github.com/krishnateja262/meta-http v0.0.0-20220315152014-2982ae223529 h1:4wTchE
 github.com/krishnateja262/meta-http v0.0.0-20220315152014-2982ae223529/go.mod h1:MtLbOomVxKHrC33kRG5ohlG6mPSzfDXuMuN5STtEPhU=
 github.com/krishnateja262/meta-http v0.0.0-20220503113759-149e04f711cd h1:riajiSNpbzKeyqOjNKsUSLGu/kgJkSnONim4w6ZRqnM=
 github.com/krishnateja262/meta-http v0.0.0-20220503113759-149e04f711cd/go.mod h1:MtLbOomVxKHrC33kRG5ohlG6mPSzfDXuMuN5STtEPhU=
+github.com/krishnateja262/meta-http v0.0.0-20220503124122-44971ce3f358 h1:tnwuQBaXqSltfB14RXjkgNxzPRVSzZ/WJfmKB4QPHq0=
+github.com/krishnateja262/meta-http v0.0.0-20220503124122-44971ce3f358/go.mod h1:MtLbOomVxKHrC33kRG5ohlG6mPSzfDXuMuN5STtEPhU=
