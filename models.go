@@ -23,9 +23,10 @@ const (
 
 	PathParamsContextKey contextKey = "PathParams"
 
-	TenantID      contextKey = "TenantID"
-	USERID        contextKey = "UserID"
-	APIContextKey contextKey = "apikey"
+	TenantID       contextKey = "TenantID"
+	USERID         contextKey = "UserID"
+	APIContextKey  contextKey = "apikey"
+	MerchantAPIKey contextKey = "x-api-key"
 )
 
 type Claims struct {
@@ -59,4 +60,6 @@ var (
 
 	//Unauthorized error
 	ErrUnauthorized = errors.New("unauthorized to access")
+
+	ErrNotFound = errors.New("Data not found")
 )
