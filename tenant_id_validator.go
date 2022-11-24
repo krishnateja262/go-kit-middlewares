@@ -5,6 +5,7 @@ import (
 
 	"github.com/go-kit/kit/endpoint"
 	"github.com/go-kit/log"
+	metahttp "github.com/krishnateja262/meta-http/pkg/meta_http"
 )
 
 func TenantIdValidator(pathParam string, logger log.Logger) endpoint.Middleware {
@@ -13,7 +14,7 @@ func TenantIdValidator(pathParam string, logger log.Logger) endpoint.Middleware 
 			pathParams := ctx.Value(PathParamsContextKey).(map[string]string)
 			id, ok := pathParams[pathParam]
 
-			tenantId := ctx.Value(TenantID).(string)
+			tenantId := ctx.Value(metahttp.TenantID).(string)
 
 			if ok && tenantId != id {
 				logger.Log("level", "error", "msg", "Tenant ID does not match with claims ID", "tenantId", id, "claimsId", tenantId)

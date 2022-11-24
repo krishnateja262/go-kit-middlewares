@@ -7,6 +7,7 @@ import (
 	"github.com/go-kit/log"
 	"github.com/go-kit/log/level"
 	"github.com/golang-jwt/jwt"
+	metahttp "github.com/krishnateja262/meta-http/pkg/meta_http"
 )
 
 func JWTValidator(hmacSecret string, logger log.Logger) endpoint.Middleware {
@@ -50,8 +51,9 @@ func JWTValidator(hmacSecret string, logger log.Logger) endpoint.Middleware {
 			}
 
 			ctx = context.WithValue(ctx, JWTClaimsContextKey, claims)
-			ctx = context.WithValue(ctx, TenantID, claims.TenantID)
-			ctx = context.WithValue(ctx, USERID, claims.UserId)
+			ctx = context.WithValue(ctx, metahttp.TenantID, claims.TenantID)
+			ctx = context.WithValue(ctx, USERID, claims.UserId) // TODO: Remove it soon
+			ctx = context.WithValue(ctx, metahttp.UserID, claims.UserId)
 
 			return next(ctx, request)
 		}

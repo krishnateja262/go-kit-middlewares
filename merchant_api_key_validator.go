@@ -27,7 +27,7 @@ type MerchantAPIResponse struct {
 }
 
 type KeyValidator interface {
-	ValidateKey(apikey string) (Merchant, error)
+	ValidateKey(ctx context.Context, apikey string) (Merchant, error)
 }
 
 type KeyStore interface {
@@ -73,8 +73,7 @@ func NewValidatorWithStore(client *metahttp.Client, store KeyStore) KeyValidator
 	}
 }
 
-func (svc DefaultValidator) fetchMerchantDetails(apikey string) (Merchant, error) {
-	ctx := context.Background()
+func (svc DefaultValidator) fetchMerchantDetails(ctx context.Context, apikey string) (Merchant, error) {
 	var res MerchantAPIResponse
 	req := map[string]string{"apikey": apikey}
 	err := svc.client.Post(ctx, "", map[string]string{}, req, &res)
@@ -86,11 +85,11 @@ func (svc DefaultValidator) fetchMerchantDetails(apikey string) (Merchant, error
 	return res.Data, nil
 }
 
-func (svc DefaultValidator) ValidateKey(apikey string) (Merchant, error) {
+func (svc DefaultValidator) ValidateKey(ctx context.Context, apikey string) (Merchant, error) {
 	mer, err := svc.store.Get(apikey)
 
 	if err != nil && err == ErrNotFound {
-		mer, err = svc.fetchMerchantDetails(apikey)
+		mer, err = svc.fetchMerchantDetails(ctx, apikey)
 
 		if err != nil {
 			return Merchant{}, err
@@ -110,15 +109,16 @@ func (svc DefaultValidator) ValidateKey(apikey string) (Merchant, error) {
 func MerchantAPIKeyValidator(svc KeyValidator, logger log.Logger) endpoint.Middleware {
 	return func(next endpoint.Endpoint) endpoint.Endpoint {
 		return func(ctx context.Context, request interface{}) (response interface{}, err error) {
-			apikey, ok := ctx.Value(MerchantAPIKey).(string)
+			apikey, ok := ctx.Value(metahttp.MerchantAPIKey).(string)
 			if !ok {
 				return nil, ErrUnauthorized
 			}
-			mer, err := svc.ValidateKey(apikey)
+			mer, err := svc.ValidateKey(ctx, apikey)
 
 			if err != nil || mer.ID == "" {
 				return nil, ErrUnauthorized
 			}
+			ctx = context.WithValue(ctx, metahttp.TenantID, mer.ID)
 			return next(ctx, request)
 		}
 	}
