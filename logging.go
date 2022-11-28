@@ -18,10 +18,10 @@ func Logger(logger log.Logger) endpoint.Middleware {
 			}
 
 			startTime := time.Now()
-			logger.Log("msg", "Server request started", "request", request, "request_id", request_id)
+			logger.Log("msg", "Server request started", "request", request, string(metahttp.RequestID), request_id)
 			res, err := next(ctx, request)
 			elapsedTime := time.Since(startTime)
-			logger.Log("msg", "Server request ended", "response", res, "request_id", request_id, "duration", elapsedTime.Milliseconds())
+			logger.Log("msg", "Server request ended", "response", res, string(metahttp.RequestID), request_id, "duration", elapsedTime.Milliseconds())
 			return res, err
 		}
 	}
